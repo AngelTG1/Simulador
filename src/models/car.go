@@ -105,9 +105,9 @@ func (c *Car) Run() {
 
 		case StateParkingBox:
 			if c.posX >= 512 {
-				// Encuentra un espacio de estacionamiento disponible
+				
 				if available, space := c.checkParkingSpace(); available {
-					// Teletransporta el coche con animación hacia el espacio disponible
+					
 					c.moveTo(space.x, space.y, 10, 50*time.Millisecond)
 					c.state = StateParked
 					c.NotifyAll()
@@ -119,22 +119,22 @@ func (c *Car) Run() {
 			}
 
 		case StateParked:
-			// Espera el tiempo de estacionamiento
+		
 			time.Sleep(parkingSpaces[c.parkingIdx].parkDuration)
-			// Marca el espacio como disponible
+			
 			parkingSpaces[c.parkingIdx].occupied = false
 			c.parkingIdx = -1
-			// Cambia el estado a "salida"
+			
 			c.state = StateExit
 			c.NotifyAll()
 
 		case StateExit:
-			// Teletransporta el coche a la posición de salida
+			
 			c.posX = 512
 			c.NotifyAll()
-			time.Sleep(500 * time.Millisecond) // Pausa breve después del teletransporte
+			time.Sleep(500 * time.Millisecond) 
 
-			// Animación de salida hacia la carretera
+			
 			c.moveTo(60, 255, 10, 50*time.Millisecond)
 			c.state = StateFinished
 

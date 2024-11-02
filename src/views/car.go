@@ -21,7 +21,7 @@ func NewCar() *Car {
 func (b *Car) AddCar(c scenes.Scene, imagePath string) {
 	carro := canvas.NewImageFromURI(storage.NewFileURI(imagePath))
 	carro.Resize(fyne.NewSize(60, 40))
-	carro.Move(fyne.NewPos(205, 205))
+	carro.Move(fyne.NewPos(0, 255))
 	b.Car = carro
 	c.AddImage(carro)
 }
