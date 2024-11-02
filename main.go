@@ -10,31 +10,43 @@ import (
 	"fyne.io/fyne/v2/widget"
 )
 
+// Variable para controlar la rotación de imágenes
+var imageCounter int
+
 func main() {
 	myApp := app.New()
-	stage := myApp.NewWindow("App - Ball")
+	stage := myApp.NewWindow("App - Parking Simulation")
 	stage.CenterOnScreen()
 	stage.Resize(fyne.NewSize(815, 515))
 	stage.SetFixedSize(true)
 
-	// Create scene
 	scene := scenes.NewScene(stage)
 	scene.Init()
 
-	// Add a new widget
-	button := widget.NewButton("Click", func() {
-		// Creamos el objeto observado
-		b1 := models.NewCar()
-		// Add Car (Observador)
-		car := views.NewCar()
-		car.AddCar(*scene)
-		// Registramos a car como observador de la goroutine b1
-		b1.Register(car)
-		go b1.Run()
+	carImages := []string{
+		"./assets/car.png",
+		"./assets/car2.png",
+		"./assets/car3.png",
+		"./assets/car4.png",
+		"./assets/car5.png",
+		"./assets/car6.png",
+		"./assets/car7.png",
+	}
+
+	button := widget.NewButton("Agregar Coche", func() {
+		b := models.NewCar()
+
+		carView := views.NewCar()
+		carView.AddCar(*scene, carImages[imageCounter])
+
+		imageCounter = (imageCounter + 1) % len(carImages)
+
+		b.Register(carView)
+		go b.Run()
 	})
 
-	button.Move(fyne.NewPos(100, 100))
-	button.Resize(fyne.NewSize(100, 50))
+	button.Move(fyne.NewPos(90, 100))
+	button.Resize(fyne.NewSize(150, 50))
 	scene.AddWidget(button)
 
 	stage.ShowAndRun()

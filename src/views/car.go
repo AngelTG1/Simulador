@@ -18,10 +18,10 @@ func NewCar() *Car {
 	return &Car{Car: nil}
 }
 
-func (b *Car) AddCar(c scenes.Scene) {
-	carro := canvas.NewImageFromURI(storage.NewFileURI("./assets/car.png"))
+func (b *Car) AddCar(c scenes.Scene, imagePath string) {
+	carro := canvas.NewImageFromURI(storage.NewFileURI(imagePath))
 	carro.Resize(fyne.NewSize(60, 40))
-	carro.Move(fyne.NewPos(200, 100))
+	carro.Move(fyne.NewPos(205, 205))
 	b.Car = carro
 	c.AddImage(carro)
 }
