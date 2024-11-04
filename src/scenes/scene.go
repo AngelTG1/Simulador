@@ -17,9 +17,6 @@ func NewScene(scene fyne.Window) *Scene {
 }
 
 func (s *Scene) Init() {
-
-	// Crear un rectángulo de fondo con color personalizado
-	// rect := canvas.NewRectangle(color.RGBA{R: 0, G: 255, B: 0, A: 150})
 	rect := canvas.NewImageFromURI(storage.NewFileURI("./assets/goFondo.png"))
 	rect.Resize(fyne.NewSize(815, 515))
 	rect.Move(fyne.NewPos(0, 0))

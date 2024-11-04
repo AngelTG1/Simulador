@@ -3,6 +3,7 @@ package models
 type Pos struct {
 	X int32
 	Y int32
+	Rotation float32
 }
 
 type Observer interface {
